@@ -114,11 +114,9 @@ jobs:
           fi
           # Display cache status
           if [ -d ".cache" ]; then
-            echo "cache-hit=true" >> $GITHUB_OUTPUT
-            "Caché hit: ${{ steps.cache.outputs.cache-hit }} - Cache restored successfully."
+            echo "cache_hit=true" >> $GITHUB_OUTPUT
           else
-            echo "cache-hit=false" >> $GITHUB_OUTPUT
-            "Caché hit: ${{ steps.cache.outputs.cache-hit }} - No cache found."
+            echo "cache_hit=false" >> $GITHUB_OUTPUT
           fi
 
       - name: 📊 Update README with WakaTime Stats
@@ -235,7 +233,7 @@ jobs:
           echo "end-time=${END_TIME}" >> $GITHUB_OUTPUT
           echo "duration=${DURATION}" >> $GITHUB_OUTPUT
           echo "Duración total: $DURATION segundos" >> $GITHUB_STEP_SUMMARY
-          echo "Caché hit: ${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_STEP_SUMMARY
+          echo "Caché hit: ${{ steps.cache-status.outputs.cache_hit }}" >> $GITHUB_STEP_SUMMARY
 
       - name: 📊 Mostrar Resumen
         run: |
@@ -243,7 +241,7 @@ jobs:
           echo "- **Duración total:** ${{ steps.metrics.outputs.duration }} segundos" >> $GITHUB_STEP_SUMMARY
           echo "- **Inicio del Workflow:** ${{ steps.metrics.outputs.time }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Fin del Workflow:** ${{ steps.metrics.outputs.end-time }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Caché hit:** ${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Caché hit:** ${{ steps.cache-status.outputs.cache_hit }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Estado del Workflow:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Fecha y hora de ejecución:** $(date)" >> $GITHUB_STEP_SUMMARY
           echo "- **Último commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
