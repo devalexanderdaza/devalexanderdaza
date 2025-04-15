@@ -12,12 +12,10 @@ jobs:
     permissions:
       contents: write
     env:
-      WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GH_ACTOR: ${{ secrets.GH_ACTOR }}
-      GH_EMAIL: ${{ secrets.GH_EMAIL }}
-      GH_USERNAME: ${{ secrets.GH_USERNAME }}
+      GH_ACTOR: ${{ vars.GH_ACTOR }}
+      GH_EMAIL: ${{ vars.GH_EMAIL }}
+      GH_USERNAME: ${{ vars.GH_USERNAME }}
+      GH_REPO: ${{ vars.GH_REPO }}
     steps:
       - name: 🔍 Validate Required Secrets
         run: |
@@ -37,16 +35,20 @@ jobs:
             missing_secrets+=("GH_TOKEN")
           fi
           
-          if [ -z "${{ secrets.GH_EMAIL }}" ]; then
+          if [ -z "${{ env.GH_EMAIL }}" ]; then
             missing_secrets+=("GH_EMAIL")
           fi
           
-          if [ -z "${{ secrets.GH_USERNAME }}" ]; then
+          if [ -z "${{ env.GH_USERNAME }}" ]; then
             missing_secrets+=("GH_USERNAME")
           fi
 
-          if [ -z "${{ secrets.GH_ACTOR }}" ]; then
+          if [ -z "${{ env.GH_ACTOR }}" ]; then
             missing_secrets+=("GH_ACTOR")
+          fi
+
+          if [ -z "${{ env.GH_REPO }}" ]; then
+            missing_secrets+=("GH_REPO")
           fi
           
           # Show error if any secrets are missing
@@ -60,8 +62,8 @@ jobs:
 
       - name: 📜 Setup Git Configuration
         run: |
-          git config --global user.name "${{ secrets.GH_ACTOR }}"
-          git config --global user.email "${{ secrets.GH_EMAIL }}"
+          git config --global user.name "${{ env.GH_ACTOR }}"
+          git config --global user.email "${{ env.GH_EMAIL }}"
           git config --global init.defaultBranch main
       
       - name: ⏱️ Get Start Time
@@ -72,11 +74,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history for all branches and tags
-          repository: ${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }} # Checkout the user's own repository
-          persist-credentials: false # Do not use the default token for authentication
+          repository: ${{ env.GH_REPO }} # Checkout the user's own repository
+          # persist-credentials: false # Do not use the default token for authentication
           ref: main # Specify the branch to checkout
-          token: ${{ secrets.GH_TOKEN }} # Use the GitHub token for authentication
-          clean: False # Do not clean the working directory for faster checkout
+          # token: ${{ secrets.GH_TOKEN }} # Use the GitHub token for authentication
+          clean: true # Do not clean the working directory for faster checkout
           submodules: false # Do not fetch submodules
           show-progress: true # Show progress during checkout
 
@@ -88,9 +90,9 @@ jobs:
         timeout-minutes: 10
         with:
           path: .cache
-          key: wakatime-cache-${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}-${{ github.run_number }}-${{ hashFiles('.github/workflows/update-profile.yml') }}
+          key: wakatime-cache-${{ env.GH_REPO }}-${{ github.run_number }}-${{ hashFiles('.github/workflows/update-profile.yml') }}
           restore-keys: |
-            wakatime-cache-${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}-
+            wakatime-cache-${{ vars.GH_REPO }}-
             wakatime-cache-
 
       - name: 📋 Handle Cache Status
@@ -126,25 +128,22 @@ jobs:
         id: wakatime-stats-update-readme
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          REPOSITORY: ${{ env.GH_REPO }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          REPOSITORY: ${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}
-          SHOW_TITLE: true
-          AUTHOR_EMAIL: ${{ secrets.GH_EMAIL }}
-          AUTHOR_NAME: ${{ secrets.GH_ACTOR }}
+          AUTHOR_EMAIL: ${{ env.GH_EMAIL }}
+          AUTHOR_NAME: ${{ env.GH_ACTOR }}
+          COMMITTER_EMAIL: ${{ vars.GH_EMAIL }}
+          COMMITTER_NAME: ${{ vars.GH_USERNAME }}
           COMMIT_MESSAGE: "chore(stats): update README.md with WakaTime Readme [skip ci]"
-          COMMITTER_EMAIL: ${{ secrets.GH_EMAIL }}
-          COMMITTER_NAME: ${{ secrets.GH_ACTOR }}
           TARGET_BRANCH: main
-          TARGET_PATH: README.md
+          SHOW_TITLE: true
           SHOW_MASKED_TIME: true
           SHOW_TIME: true
           SHOW_TOTAL: true
-          # Generate a custom chart block ASCII art
-          # BLOCKS: "█" # Custom block character for the chart. Other options: "▌", "▌", "▐", "█", "▓", "▒", "░"
           # Language for the chart. Options: "python", "javascript", "java", "csharp", "go", "ruby", "php", "swift", "typescript", "html", "css", "bash", "sql", "kotlin", "rust", "typescriptreact", "typescript.tsx"
-          CODE_LANG: "python javascript java csharp go ruby php swift typescript html css bash sql kotlin rust"
-          TIME_RANGE: "last_90_days" # Time range for the chart. Options: "last_7_days", "last_30_days", "last_90_days", "last_year"
-          LANG_COUNT: 10
+          CODE_LANG: py js java go ruby php ts html css sh kt rust json yaml yml md
+          TIME_RANGE: all_time # Time range for the chart. Options: "last_7_days", "last_30_days", "last_90_days", "last_year"
+          LANG_COUNT: -1 # Number of languages to show in the chart. -1 for all languages
           SECTION_NAME: "wakareadme"
 
       - name: 🔍 Check for significant changes
@@ -200,9 +199,9 @@ jobs:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           SECTION_NAME: "waka"
-          SHOW_LINES_OF_CODE: "False"
+          SHOW_LINES_OF_CODE: "True"
           SHOW_PROFILE_VIEWS: "False"
-          SHOW_COMMIT: "False"
+          SHOW_COMMIT: "True"
           SHOW_DAYS_OF_WEEK: "True"
           SHOW_LANGUAGE: "True"
           SHOW_OS: "True"
@@ -211,48 +210,44 @@ jobs:
           SHOW_LANGUAGE_PER_REPO: "True"
           SHOW_SHORT_INFO: "True"
           SHOW_LOC_CHART: "False"
-          SHOW_UPDATED_DATE: "False"
+          SHOW_UPDATED_DATE: "True"
           SHOW_TOTAL_CODE_TIME: "False"
           SHOW_TIMEZONE: "False"
           COMMIT_MESSAGE: "chore(stats): update wakatime stats [skip ci]"
-          IGNORED_REPOS: "[`${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}']" # Ignore own repository
           COMMIT_SINGLE: "False"
           DEBUG_LOGGING: "True"
-          PULL_BRANCH_NAME: "main"
-          PUSH_BRANCH_NAME: "main"
-          COMMIT_EMAIL: "${{ secrets.GH_EMAIL }}"
-          COMMIT_USERNAME: "${{ secrets.GH_ACTOR }}"
+          COMMIT_BY_ME: "True"
+          IGNORED_REPOS: '["${{ vars.GH_REPO }}"]'
 
       - name: 📈 Registrar Métricas
         id: metrics
         run: |
           START_TIME="${{ steps.start-time.outputs.time }}"
-          END_TIME="$(date +%s)"
+          END_TIME=$(date +%s)
           DURATION=$((END_TIME - START_TIME))
-          echo "start-time=${START_TIME}" >> $GITHUB_OUTPUT
-          echo "end-time=${END_TIME}" >> $GITHUB_OUTPUT
+          echo "start_time=${START_TIME}" >> $GITHUB_OUTPUT
+          echo "end_time=${END_TIME}" >> $GITHUB_OUTPUT
           echo "duration=${DURATION}" >> $GITHUB_OUTPUT
           echo "Duración total: $DURATION segundos" >> $GITHUB_STEP_SUMMARY
           echo "Caché hit: ${{ steps.cache-status.outputs.cache_hit }}" >> $GITHUB_STEP_SUMMARY
 
       - name: 📊 Mostrar Resumen
         run: |
-          echo "### Resumen del Workflow" >> $GITHUB_STEP_SUMMARY
           echo "- **Duración total:** ${{ steps.metrics.outputs.duration }} segundos" >> $GITHUB_STEP_SUMMARY
-          echo "- **Inicio del Workflow:** ${{ steps.metrics.outputs.time }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Fin del Workflow:** ${{ steps.metrics.outputs.end-time }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Inicio del Workflow:** ${{ steps.metrics.outputs.start_time }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Fin del Workflow:** ${{ steps.metrics.outputs.end_time }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Caché hit:** ${{ steps.cache-status.outputs.cache_hit }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Estado del Workflow:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Fecha y hora de ejecución:** $(date)" >> $GITHUB_STEP_SUMMARY
           echo "- **Último commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Autor:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Nombre del autor:** ${{ secrets.GH_ACTOR }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Nombre de usuario:** ${{ secrets.GH_USERNAME }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Email:** ${{ secrets.GH_EMAIL }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Repositorio:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Nombre del autor:** ${{ vars.GH_ACTOR }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Nombre de usuario:** ${{ vars.GH_USERNAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Email:** ${{ vars.GH_EMAIL }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Repositorio:** ${{ vars.GH_REPO }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch:** ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Acción:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL del Commit:** ${{ github.server_url }}/${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL del Commit:** ${{ github.server_url }}/${{ vars.GH_REPO }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "### Resumen del Workflow" >> $GITHUB_STEP_SUMMARY
       
       - name: 📧 Notify Result
         run: |
