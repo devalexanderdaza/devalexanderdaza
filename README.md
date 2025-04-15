@@ -219,6 +219,14 @@ I'm a passionate software developer focused on creating innovative and sustainab
 
 ## 📊 WakaTime Weekly Stats
 
+<!--START_SECTION:waka-readme-->
+<!--END_SECTION:waka-readme-->
+
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=devalexanderdaza&theme=dark&layout=compact" alt="WakaTime Stats" />
+</div>
+
 <!--START_SECTION:waka-->
 ![Code Time](http://img.shields.io/badge/Code%20Time-2%2C020%20hrs%2056%20mins-blue)
 
