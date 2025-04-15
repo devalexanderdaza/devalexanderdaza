@@ -221,14 +221,92 @@ I'm a passionate software developer focused on creating innovative and sustainab
 
 <!--START_SECTION:wakareadme-->
 
-```python javascript java csharp go ruby php swift typescript html css bash sql kotlin rust
-From: 08 April 2025 - To: 15 April 2025
+```py js java go ruby php ts html css sh kt rust json yaml yml md
+From: 29 October 2021 - To: 15 April 2025
 
-Total Time: 4 mins
+Total Time: 2,020 hrs 56 mins
 
-PHP     3 mins          ███████████████████▒░░░░░   77.40 %
-HTML    0 secs          ████▓░░░░░░░░░░░░░░░░░░░░   18.72 %
-Other   0 secs          █░░░░░░░░░░░░░░░░░░░░░░░░   03.88 %
+TypeScript                 1,204 hrs 10 mins███████████████░░░░░░░░░░   59.59 %
+JSON                       158 hrs 41 mins ██░░░░░░░░░░░░░░░░░░░░░░░   07.85 %
+JavaScript                 136 hrs         █▓░░░░░░░░░░░░░░░░░░░░░░░   06.73 %
+PHP                        134 hrs 25 mins █▓░░░░░░░░░░░░░░░░░░░░░░░   06.65 %
+HTML                       69 hrs 11 mins  █░░░░░░░░░░░░░░░░░░░░░░░░   03.42 %
+Bash                       63 hrs 50 mins  ▓░░░░░░░░░░░░░░░░░░░░░░░░   03.16 %
+Other                      54 hrs 21 mins  ▓░░░░░░░░░░░░░░░░░░░░░░░░   02.69 %
+Svelte                     37 hrs 12 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   01.84 %
+YAML                       35 hrs 47 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   01.77 %
+Docker                     18 hrs 30 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.92 %
+Markdown                   15 hrs 40 mins  ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.78 %
+CSS                        13 hrs 2 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.65 %
+Dart                       9 hrs 8 mins    ░░░░░░░░░░░░░░░░░░░░░░░░░   00.45 %
+C#                         8 hrs 43 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.43 %
+.env file                  8 hrs 42 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.43 %
+Git Config                 8 hrs 10 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.40 %
+Python                     6 hrs 49 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.34 %
+TSConfig                   6 hrs 1 min     ░░░░░░░░░░░░░░░░░░░░░░░░░   00.30 %
+Java                       4 hrs 48 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.24 %
+GitIgnore file             4 hrs 45 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.24 %
+SQL                        4 hrs 26 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.22 %
+Text                       3 hrs 10 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.16 %
+Blade Template             2 hrs 21 mins   ░░░░░░░░░░░░░░░░░░░░░░░░░   00.12 %
+Nix                        2 hrs 7 mins    ░░░░░░░░░░░░░░░░░░░░░░░░░   00.11 %
+Prisma                     1 hr 27 mins    ░░░░░░░░░░░░░░░░░░░░░░░░░   00.07 %
+Apache Config              1 hr            ░░░░░░░░░░░░░░░░░░░░░░░░░   00.05 %
+tsconfig                   47 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.04 %
+Twig                       36 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.03 %
+Solidity                   33 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.03 %
+INI                        31 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.03 %
+XML                        31 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.03 %
+Groovy                     25 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.02 %
+EJS                        24 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.02 %
+Csproj                     22 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.02 %
+ESLint File                20 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.02 %
+Assembly                   17 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+yarn.lock                  16 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+TOML                       16 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+Shell Script               14 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+SCSS                       13 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+EditorConfig               10 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+Mustache                   10 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+htaccess                   10 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+CocoaPods                  10 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+TSQL                       9 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+Nginx configuration file   9 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+HTTP Request               8 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+AUTO_DETECTED              8 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+Git                        7 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+Nginx                      7 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+Log                        6 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+textmate                   6 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.01 %
+SmartyConfig               5 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Makefile                   4 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+GraphQL                    4 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Image (svg)                4 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+SourceMap                  4 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Ezhil                      3 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Perl                       2 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Docker File                2 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Composer Log               1 min           ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Prettier File              0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+MiniScript                 0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Smarty                     0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Prolog                     0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+CSV                        0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+JSHint                     0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Properties                 0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Dockerfile                 0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+C++                        0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Tcsh                       0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Java Properties            0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Sass                       0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Pug                        0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+SVG                        0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Swagger Codegen File       0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Kubernetes Helm File       0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Google Cloud File          0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Batchfile                  0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Solution File              0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
+Gradle                     0 secs          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 %
 ```
 
 <!--END_SECTION:wakareadme-->
