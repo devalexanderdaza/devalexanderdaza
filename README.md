@@ -219,8 +219,8 @@ I'm a passionate software developer focused on creating innovative and sustainab
 
 ## 📊 WakaTime Weekly Stats
 
-<!--START_SECTION:waka-readme-->
-<!--END_SECTION:waka-readme-->
+<!--START_SECTION:wakareadme-->
+<!--END_SECTION:wakareadme-->
 
 
 <div align="center">

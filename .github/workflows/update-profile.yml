@@ -71,34 +71,38 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1 # Fetch only the latest commit to speed up the process
+          fetch-depth: 0 # Fetch all history for all branches and tags
+          repository: ${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }} # Checkout the user's own repository
           persist-credentials: false # Do not use the default token for authentication
           ref: main # Specify the branch to checkout
           token: ${{ secrets.GH_TOKEN }} # Use the GitHub token for authentication
           clean: False # Do not clean the working directory for faster checkout
-          lfs: false # Do not use Git LFS 
           submodules: false # Do not fetch submodules
           show-progress: true # Show progress during checkout
-          path: ./ # Specify the path to checkout the repository
 
       # Setup cache for WakaTime
       - name: 🗄️ Setup Cache for WakaTime
         uses: actions/cache@v3
         id: cache
         continue-on-error: true
-        if: always() # Always run this step
         timeout-minutes: 10
         with:
           path: .cache
-          key: wakatime-cache-${{ github.repository }}-${{ github.run_number }}-${{ hashFiles('.github/workflows/update-profile.yml') }}
+          key: wakatime-cache-${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}-${{ github.run_number }}-${{ hashFiles('.github/workflows/update-profile.yml') }}
           restore-keys: |
-            wakatime-cache-${{ github.repository }}-
+            wakatime-cache-${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}-
             wakatime-cache-
 
       - name: 📋 Handle Cache Status
+        id: cache-status
         run: |
           # Check if cache was hit or not
           if [ -d ".cache" ]; then
+            echo "Cache hit, restoring..."
+            # Restore the cache
+            if [ -f ".cache/last_stats.json" ]; then
+              cp .cache/last_stats.json stats.json
+            fi
             echo "Cache restored successfully."
           else
             echo "No cache found, creating a new one."
@@ -108,7 +112,14 @@ jobs:
           if [ -f "stats.json" ]; then
             cp stats.json .cache/last_stats.json
           fi
-          echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
+          # Display cache status
+          if [ -d ".cache" ]; then
+            echo "cache-hit=true" >> $GITHUB_OUTPUT
+            "Caché hit: ${{ steps.cache.outputs.cache-hit }} - Cache restored successfully."
+          else
+            echo "cache-hit=false" >> $GITHUB_OUTPUT
+            "Caché hit: ${{ steps.cache.outputs.cache-hit }} - No cache found."
+          fi
 
       - name: 📊 Update README with WakaTime Stats
         uses: athul/waka-readme@master
@@ -130,7 +141,13 @@ jobs:
           SHOW_MASKED_TIME: true
           SHOW_TIME: true
           SHOW_TOTAL: true
-          SECTION_NAME: "waka-readme"
+          # Generate a custom chart block ASCII art
+          # BLOCKS: "█" # Custom block character for the chart. Other options: "▌", "▌", "▐", "█", "▓", "▒", "░"
+          # Language for the chart. Options: "python", "javascript", "java", "csharp", "go", "ruby", "php", "swift", "typescript", "html", "css", "bash", "sql", "kotlin", "rust", "typescriptreact", "typescript.tsx"
+          CODE_LANG: "python javascript java csharp go ruby php swift typescript html css bash sql kotlin rust"
+          TIME_RANGE: "last_90_days" # Time range for the chart. Options: "last_7_days", "last_30_days", "last_90_days", "last_year"
+          LANG_COUNT: 10
+          SECTION_NAME: "wakareadme"
 
       - name: 🔍 Check for significant changes
         id: check-changes
@@ -138,9 +155,44 @@ jobs:
           # Compara estadísticas actuales con las anteriores
           if [ -f ".cache/last_stats.json" ]; then
             # Lógica para comparar y decidir si actualizar
-            echo "::set-output name=should_update::$(python3 -c 'import sys, json, os; print("true" if not os.path.exists(".cache/last_stats.json") or json.load(open(".cache/last_stats.json"))["total_coding_time"] != json.load(sys.stdin)["total_coding_time"] else "false")')"
+            # echo "should_update=$(python3 -c 'import sys, json, os; print("true" if not os.path.exists(".cache/last_stats.json") or json.load(open(".cache/last_stats.json"))["total_coding_time"] != json.load(sys.stdin)["total_coding_time"] else "false")')"
+            CURRENT_STATS=$(cat stats.json)
+            LAST_STATS=$(cat .cache/last_stats.json)
+            CURRENT_TIME=$(echo $CURRENT_STATS | jq '.total_coding_time')
+            LAST_TIME=$(echo $LAST_STATS | jq '.total_coding_time')
+            CURRENT_DATE=$(echo $CURRENT_STATS | jq '.last_update')
+            LAST_DATE=$(echo $LAST_STATS | jq '.last_update')
+            CURRENT_DATE=$(date -d "$CURRENT_DATE" +%s)
+            LAST_DATE=$(date -d "$LAST_DATE" +%s)
+            TIME_DIFF=$((CURRENT_DATE - LAST_DATE))
+            TIME_DIFF_DAYS=$((TIME_DIFF / 86400))
+            TIME_DIFF_HOURS=$((TIME_DIFF / 3600))
+            TIME_DIFF_MINUTES=$((TIME_DIFF / 60))
+            TIME_DIFF_SECONDS=$((TIME_DIFF % 60))
+            echo "Tiempo actual: $CURRENT_TIME"
+            echo "Último tiempo: $LAST_TIME"
+            echo "Diferencia de tiempo: $TIME_DIFF_DAYS días, $TIME_DIFF_HOURS horas, $TIME_DIFF_MINUTES minutos, $TIME_DIFF_SECONDS segundos"
+            echo "Diferencia de tiempo en segundos: $TIME_DIFF"
+            echo "Diferencia de tiempo en minutos: $TIME_DIFF_MINUTES"
+            echo "Diferencia de tiempo en horas: $TIME_DIFF_HOURS"
+            echo "Diferencia de tiempo en días: $TIME_DIFF_DAYS"
+            if [ "$CURRENT_TIME" = "$LAST_TIME" ] && [ "$TIME_DIFF_DAYS" -lt 7 ]; then
+              echo "should_update=false" >> $GITHUB_OUTPUT
+              echo "No se requiere actualización."
+            else
+              echo "should_update=true" >> $GITHUB_OUTPUT
+              echo "Se requiere actualización."
+            fi
           else
-            echo "::set-output name=should_update::true"
+            echo "should_update=true" >> $GITHUB_OUTPUT
+            echo "No se encontraron estadísticas anteriores. Se requiere actualización."
+          fi
+          # Guardar las estadísticas actuales en el caché
+          if [ -f "stats.json" ]; then
+            cp stats.json .cache/last_stats.json
+            echo "Estadísticas actuales guardadas en el caché."
+          else
+            echo "No se encontraron estadísticas actuales para guardar."
           fi
 
       - name: 📊 Update WakaTime Stats
@@ -174,27 +226,35 @@ jobs:
           COMMIT_USERNAME: "${{ secrets.GH_ACTOR }}"
 
       - name: 📈 Registrar Métricas
+        id: metrics
         run: |
           START_TIME="${{ steps.start-time.outputs.time }}"
           END_TIME="$(date +%s)"
           DURATION=$((END_TIME - START_TIME))
+          echo "start-time=${START_TIME}" >> $GITHUB_OUTPUT
+          echo "end-time=${END_TIME}" >> $GITHUB_OUTPUT
+          echo "duration=${DURATION}" >> $GITHUB_OUTPUT
           echo "Duración total: $DURATION segundos" >> $GITHUB_STEP_SUMMARY
           echo "Caché hit: ${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_STEP_SUMMARY
 
       - name: 📊 Mostrar Resumen
         run: |
           echo "### Resumen del Workflow" >> $GITHUB_STEP_SUMMARY
-          echo "- **Duración total:** $DURATION segundos" >> $GITHUB_STEP_SUMMARY
+          echo "- **Duración total:** ${{ steps.metrics.outputs.duration }} segundos" >> $GITHUB_STEP_SUMMARY
+          echo "- **Inicio del Workflow:** ${{ steps.metrics.outputs.time }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Fin del Workflow:** ${{ steps.metrics.outputs.end-time }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Caché hit:** ${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Estado del Workflow:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Fecha y hora de ejecución:** $(date)" >> $GITHUB_STEP_SUMMARY
           echo "- **Último commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Autor:** ${{ secrets.GH_ACTOR }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Autor:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Nombre del autor:** ${{ secrets.GH_ACTOR }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Nombre de usuario:** ${{ secrets.GH_USERNAME }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Email:** ${{ secrets.GH_EMAIL }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Repositorio:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch:** ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Acción:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL del Commit:** ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL del Commit:** ${{ github.server_url }}/${{ secrets.GH_USERNAME }}/${{ secrets.GH_USERNAME }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
       
       - name: 📧 Notify Result
         run: |
