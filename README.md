@@ -220,6 +220,17 @@ I'm a passionate software developer focused on creating innovative and sustainab
 ## 📊 WakaTime Weekly Stats
 
 <!--START_SECTION:wakareadme-->
+
+```python javascript java csharp go ruby php swift typescript html css bash sql kotlin rust
+From: 08 April 2025 - To: 15 April 2025
+
+Total Time: 4 mins
+
+PHP     3 mins          ███████████████████▒░░░░░   77.40 %
+HTML    0 secs          ████▓░░░░░░░░░░░░░░░░░░░░   18.72 %
+Other   0 secs          █░░░░░░░░░░░░░░░░░░░░░░░░   03.88 %
+```
+
 <!--END_SECTION:wakareadme-->
 
 
