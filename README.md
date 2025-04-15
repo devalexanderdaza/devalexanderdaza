@@ -219,14 +219,31 @@ I'm a passionate software developer focused on creating innovative and sustainab
 
 ## 📊 WakaTime Weekly Stats
 
-<!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-2%2C020%20hrs%2056%20mins-blue)
+<!--START_SECTION:wakareadme-->
 
+```python javascript java csharp go ruby php swift typescript html css bash sql kotlin rust
+From: 08 April 2025 - To: 15 April 2025
+
+Total Time: 4 mins
+
+PHP     3 mins          ███████████████████▒░░░░░   77.40 %
+HTML    0 secs          ████▓░░░░░░░░░░░░░░░░░░░░   18.72 %
+Other   0 secs          █░░░░░░░░░░░░░░░░░░░░░░░░   03.88 %
+```
+
+<!--END_SECTION:wakareadme-->
+
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=devalexanderdaza&theme=dark&layout=compact" alt="WakaTime Stats" />
+</div>
+
+<!--START_SECTION:waka-->
 **🐱 My GitHub Data** 
 
-> 📦 342.4 kB Used in GitHub's Storage 
+> 📦 319.6 kB Used in GitHub's Storage 
  > 
-> 🏆 215 Contributions in the Year 2025
+> 🏆 218 Contributions in the Year 2025
  > 
 > 💼 Opted to Hire
  > 
@@ -234,24 +251,16 @@ I'm a passionate software developer focused on creating innovative and sustainab
  > 
 > 🔑 31 Private Repositories 
  > 
-**I'm an Early 🐤** 
+📅 **I'm Most Productive on Tuesday** 
 
 ```text
-🌞 Morning                13534 commits       ██████░░░░░░░░░░░░░░░░░░░   25.26 % 
-🌆 Daytime                14621 commits       ███████░░░░░░░░░░░░░░░░░░   27.29 % 
-🌃 Evening                10736 commits       █████░░░░░░░░░░░░░░░░░░░░   20.04 % 
-🌙 Night                  14688 commits       ███████░░░░░░░░░░░░░░░░░░   27.41 % 
-```
-📅 **I'm Most Productive on Friday** 
-
-```text
-Monday                   7465 commits        ███░░░░░░░░░░░░░░░░░░░░░░   13.93 % 
-Tuesday                  7576 commits        ████░░░░░░░░░░░░░░░░░░░░░   14.14 % 
-Wednesday                7497 commits        ███░░░░░░░░░░░░░░░░░░░░░░   13.99 % 
-Thursday                 7446 commits        ███░░░░░░░░░░░░░░░░░░░░░░   13.90 % 
-Friday                   7924 commits        ████░░░░░░░░░░░░░░░░░░░░░   14.79 % 
-Saturday                 7879 commits        ████░░░░░░░░░░░░░░░░░░░░░   14.71 % 
-Sunday                   7792 commits        ████░░░░░░░░░░░░░░░░░░░░░   14.54 % 
+Monday                   291 commits         ███░░░░░░░░░░░░░░░░░░░░░░   10.68 % 
+Tuesday                  594 commits         █████░░░░░░░░░░░░░░░░░░░░   21.80 % 
+Wednesday                403 commits         ████░░░░░░░░░░░░░░░░░░░░░   14.79 % 
+Thursday                 300 commits         ███░░░░░░░░░░░░░░░░░░░░░░   11.01 % 
+Friday                   526 commits         █████░░░░░░░░░░░░░░░░░░░░   19.30 % 
+Saturday                 425 commits         ████░░░░░░░░░░░░░░░░░░░░░   15.60 % 
+Sunday                   186 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   06.83 % 
 ```
 
 
@@ -265,9 +274,6 @@ Other                    0 secs              █░░░░░░░░░░�
 
 🔥 Editors: 
 VS Code                  4 mins              █████████████████████████   100.00 % 
-
-🐱‍💻 Projects: 
-sipro                    4 mins              █████████████████████████   100.00 % 
 
 💻 Operating System: 
 Linux                    4 mins              █████████████████████████   100.00 % 
@@ -284,10 +290,6 @@ Java                     1 repo              ░░░░░░░░░░░�
 ```
 
 
-
-**Timeline**
-
-![Lines of Code chart](https://raw.githubusercontent.com/devalexanderdaza/devalexanderdaza/main/assets/bar_graph.png)
 
 
 <!--END_SECTION:waka-->
