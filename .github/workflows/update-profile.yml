@@ -1,4 +1,4 @@
-name: 📊 Profile Dashboard Update
+name: Profile Dashboard Update
 
 on:
   workflow_dispatch: # 🔄 Allow manual trigger
@@ -65,22 +65,18 @@ jobs:
           git config --global user.name "${{ env.GH_ACTOR }}"
           git config --global user.email "${{ env.GH_EMAIL }}"
           git config --global init.defaultBranch main
-      
-      - name: ⏱️ Get Start Time
-        id: start-time
-        run: echo "time=$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for all branches and tags
+          fetch-depth: 5 # Fetch the last 5 commits for better performance
           repository: ${{ env.GH_REPO }} # Checkout the user's own repository
           # persist-credentials: false # Do not use the default token for authentication
           ref: main # Specify the branch to checkout
           # token: ${{ secrets.GH_TOKEN }} # Use the GitHub token for authentication
-          clean: true # Do not clean the working directory for faster checkout
+          clean: false # Do not clean the working directory for faster checkout
           submodules: false # Do not fetch submodules
-          show-progress: true # Show progress during checkout
+          show-progress: false # Show progress during checkout
 
       # Setup cache for WakaTime
       - name: 🗄️ Setup Cache for WakaTime
@@ -90,7 +86,7 @@ jobs:
         timeout-minutes: 10
         with:
           path: .cache
-          key: wakatime-cache-${{ env.GH_REPO }}-${{ github.run_number }}-${{ hashFiles('.github/workflows/update-profile.yml') }}
+          key: wakatime-cache-${{ vars.GH_REPO }}-${{ github.run_number }}-${{ hashFiles('.github/workflows/update-profile.yml') }}
           restore-keys: |
             wakatime-cache-${{ vars.GH_REPO }}-
             wakatime-cache-
@@ -126,17 +122,14 @@ jobs:
           AUTHOR_EMAIL: ${{ env.GH_EMAIL }}
           AUTHOR_NAME: ${{ env.GH_ACTOR }}
           COMMITTER_EMAIL: ${{ vars.GH_EMAIL }}
-          COMMITTER_NAME: ${{ vars.GH_USERNAME }}
+          COMMITTER_NAME: ${{ vars.GH_ACTOR }}
           COMMIT_MESSAGE: "chore(stats): update README.md with WakaTime Readme [skip ci]"
           TARGET_BRANCH: main
           SHOW_TITLE: true
-          SHOW_MASKED_TIME: true
-          SHOW_TIME: true
-          SHOW_TOTAL: true
           # Language for the chart. Options: "python", "javascript", "java", "csharp", "go", "ruby", "php", "swift", "typescript", "html", "css", "bash", "sql", "kotlin", "rust", "typescriptreact", "typescript.tsx"
           CODE_LANG: py js java go ruby php ts html css sh kt rust json yaml yml md
           TIME_RANGE: all_time # Time range for the chart. Options: "last_7_days", "last_30_days", "last_90_days", "last_year"
-          LANG_COUNT: -1 # Number of languages to show in the chart. -1 for all languages
+          LANG_COUNT: 15 # Number of languages to show in the chart. -1 for all languages
           SECTION_NAME: "wakareadme"
 
       - name: 📊 Update WakaTime Stats
@@ -146,67 +139,26 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           SECTION_NAME: "waka"
           SHOW_LINES_OF_CODE: "True"
-          SHOW_PROFILE_VIEWS: "False"
+          SHOW_PROFILE_VIEWS: "True"
           SHOW_COMMIT: "True"
           SHOW_DAYS_OF_WEEK: "True"
           SHOW_LANGUAGE: "True"
           SHOW_OS: "True"
-          SHOW_PROJECTS: "False" 
+          SHOW_PROJECTS: "True" 
           SHOW_EDITORS: "True"
           SHOW_LANGUAGE_PER_REPO: "True"
           SHOW_SHORT_INFO: "True"
-          SHOW_LOC_CHART: "False"
+          SHOW_LOC_CHART: "True"
           SHOW_UPDATED_DATE: "True"
-          SHOW_TOTAL_CODE_TIME: "False"
-          SHOW_TIMEZONE: "False"
+          SHOW_TOTAL_CODE_TIME: "True"
+          SHOW_TIMEZONE: "True"
           COMMIT_MESSAGE: "chore(stats): update wakatime stats [skip ci]"
           COMMIT_SINGLE: "False"
           DEBUG_LOGGING: "True"
           COMMIT_BY_ME: "True"
           IGNORED_REPOS: '["${{ vars.GH_REPO }}"]'
-
-      - name: 📈 Registrar Métricas
-        id: metrics
-        run: |
-          START_TIME="${{ steps.start-time.outputs.time }}"
-          END_TIME=$(date +%s)
-          DURATION=$((END_TIME - START_TIME))
-          echo "start_time=${START_TIME}" >> $GITHUB_OUTPUT
-          echo "end_time=${END_TIME}" >> $GITHUB_OUTPUT
-          echo "duration=${DURATION}" >> $GITHUB_OUTPUT
-          echo "Duración total: $DURATION segundos" >> $GITHUB_STEP_SUMMARY
-          echo "Caché hit: ${{ steps.cache-status.outputs.cache_hit }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: 📊 Mostrar Resumen
-        run: |
-          echo "- **Duración total:** ${{ steps.metrics.outputs.duration }} segundos" >> $GITHUB_STEP_SUMMARY
-          echo "- **Inicio del Workflow:** ${{ steps.metrics.outputs.start_time }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Fin del Workflow:** ${{ steps.metrics.outputs.end_time }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Caché hit:** ${{ steps.cache-status.outputs.cache_hit }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Estado del Workflow:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Fecha y hora de ejecución:** $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Último commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Nombre del autor:** ${{ vars.GH_ACTOR }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Nombre de usuario:** ${{ vars.GH_USERNAME }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Email:** ${{ vars.GH_EMAIL }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Repositorio:** ${{ vars.GH_REPO }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch:** ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Acción:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL del Commit:** ${{ github.server_url }}/${{ vars.GH_REPO }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "### Resumen del Workflow" >> $GITHUB_STEP_SUMMARY
-      
-      - name: 📧 Notify Result
-        run: |
-          STATUS="${{ job.status }}"
-          echo "::notice ::Workflow completado con estado: $STATUS"
-          
-          # Puedes expandir esta sección para enviar notificaciones 
-          # por correo o a servicios como Slack, Discord, etc.
-          
-          if [ "$STATUS" = "success" ]; then
-            echo "✅ Profile updated successfully!"
-          elif [ "$STATUS" = "failure" ]; then
-            echo "❌ Profile update failed!"
-          else
-            echo "⚠️ Profile update status: $STATUS"
-          fi
+          PULL_BRANCH_NAME: "main"
+          PUSH_BRANCH_NAME: "main"
+          UPDATED_DATE_FORMAT: "YYYY-MM-DD"
+          COMMIT_USERNAME: "${{ vars.GH_ACTOR }}"
+          COMMIT_EMAIL: "${{ vars.GH_EMAIL }}"
