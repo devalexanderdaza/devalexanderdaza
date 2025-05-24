@@ -8,8 +8,8 @@
   />
 </p>
 
-<h1 align="center">Hi 👋, I'm Alexander Daza 😎</h1>
-<h3 align="center">Sr. Backend and Full-stack web 🤓 and Mobile developer 📱, Blockchain and Web3 enthusiast 🔗, Software Architect 🏗️, and Jr. Offensive Security Engineer ☠️</h3>
+<h1 align="center">👋 Hi, I'm Alexander Daza 😎</h1>
+<h3 align="center">🚀 Sr. Backend and Full-stack web 🤓 and Mobile developer 📱, Blockchain and Web3 enthusiast 🔗, Software Architect 🏗️, and Jr. Offensive Security Engineer ☠️ 🚀</h3>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/devalexanderdaza/"><img src="https://img.shields.io/badge/LinkedIn-devalexanderdaza-blue?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
@@ -24,7 +24,7 @@
 
 <h1 align="center">👨‍💻 About Me</h1>
 
-I'm a passionate software developer focused on creating innovative and sustainable solutions. With over 14 years of experience in software development and more than 5 years specializing in mobile applications, I have extensive expertise in various technologies.
+I'm a passionate software developer focused on creating innovative 💡 and sustainable 🌱 solutions. With over 14 years of experience in software development and more than 5 years specializing in mobile applications, I have extensive expertise in various technologies.
 
 - 🌱 Currently mastering **TypeScript, NodeJS (NestJS), Python (Flask - FastAPI), Go (Gin, Fiber, FastHTTP) and Flutter**
 - 👯 Looking to collaborate on **Open source web projects, primarily written in JavaScript and TypeScript**
@@ -38,13 +38,13 @@ I'm a passionate software developer focused on creating innovative and sustainab
 ### 💡 Always Learning
 
 <div>
-  I'm constantly learning and seeking new ways to improve both my technical and leadership skills. If you're looking for a highly skilled, passionate, and committed professional, feel free to reach out. I'm ready to tackle any challenge that comes my way!
+  I'm constantly learning 🧠 and seeking new ways to improve both my technical and leadership skills 📈. If you're looking for a highly skilled, passionate 🔥, and committed professional, feel free to reach out. I'm ready to tackle any challenge that comes my way! 🚀
 </div>
 
 <br>
 
 <details open>
-  <summary><strong>Programming Languages</strong></summary>
+  <summary><strong>💻 Programming Languages</strong></summary>
   <div>
     <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go">
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
@@ -64,7 +64,7 @@ I'm a passionate software developer focused on creating innovative and sustainab
   </div>
 </details>
 <details>
-  <summary><strong>Frameworks & Libraries</strong></summary>
+  <summary><strong>📚 Frameworks & Libraries</strong></summary>
     <div>
     <img src="https://img.shields.io/badge/Gin-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Gin Gonic">
     <img src="https://img.shields.io/badge/Fiber-FF2D20?style=for-the-badge&logo=go&logoColor=white" alt="Fiber">
@@ -89,7 +89,7 @@ I'm a passionate software developer focused on creating innovative and sustainab
 </details>
 
 <details>
-  <summary><strong>Blockchain & Web3</strong></summary>
+  <summary><strong>🔗 Blockchain & Web3</strong></summary>
   <div>
     <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
     <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white" alt="MariaDB">
@@ -103,7 +103,7 @@ I'm a passionate software developer focused on creating innovative and sustainab
 </details>
 
 <details>
-  <summary><strong>Databases</strong></summary>
+  <summary><strong>🗄️ Databases</strong></summary>
   <div>
     <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
     <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white" alt="MariaDB">
@@ -117,7 +117,7 @@ I'm a passionate software developer focused on creating innovative and sustainab
 </details>
 
 <details>
-  <summary><strong>Cloud & DevOps</strong></summary>
+  <summary><strong>☁️ Cloud & DevOps</strong></summary>
   <div>
     <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS">
     <img src="https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Google Cloud">
@@ -133,7 +133,7 @@ I'm a passionate software developer focused on creating innovative and sustainab
 </details>
 
 <details>
-  <summary><strong>Tools & Platforms</strong></summary>
+  <summary><strong>🔧 Tools & Platforms</strong></summary>
   <div>
     <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
@@ -159,7 +159,7 @@ I'm a passionate software developer focused on creating innovative and sustainab
 ### 💻 Open Source Projects
 
 <div>
-  <p>Here are some of my open-source projects that I have developed and contributed to:</p>
+  <p>🌟 Here are some of my open-source projects that I have developed and contributed to:</p>
 </div>
 
 <br>
@@ -205,9 +205,9 @@ I'm a passionate software developer focused on creating innovative and sustainab
 <br>
 
 ---
-<h1 align="center">📈 My Stats</h2>
+<h1 align="center">📈 My Stats</h1>
 
-### 📊 GitHub Stats
+## 📊 GitHub Stats
 
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs?username=devalexanderdaza&show_icons=true&theme=dark&locale=en&layout=compact" alt="devalexanderdaza" />
@@ -241,26 +241,22 @@ Other   0 secs          █░░░░░░░░░░░░░░░░░�
 <!--START_SECTION:waka-->
 **🐱 My GitHub Data** 
 
-> 📦 319.6 kB Used in GitHub's Storage 
- > 
-> 🏆 218 Contributions in the Year 2025
- > 
-> 💼 Opted to Hire
- > 
-> 📜 24 Public Repositories 
- > 
-> 🔑 31 Private Repositories 
- > 
+> 📦 Storage Used: 319.6 kB
+> 🏆 Contributions (Year): 218
+> 💼 Hireable: Opted to Hire
+> 📜 Public Repos: 24
+> 🔑 Private Repos: 31
+ 
 📅 **I'm Most Productive on Tuesday** 
 
 ```text
-Monday                   291 commits         ███░░░░░░░░░░░░░░░░░░░░░░   10.68 % 
-Tuesday                  594 commits         █████░░░░░░░░░░░░░░░░░░░░   21.80 % 
-Wednesday                403 commits         ████░░░░░░░░░░░░░░░░░░░░░   14.79 % 
-Thursday                 300 commits         ███░░░░░░░░░░░░░░░░░░░░░░   11.01 % 
-Friday                   526 commits         █████░░░░░░░░░░░░░░░░░░░░   19.30 % 
-Saturday                 425 commits         ████░░░░░░░░░░░░░░░░░░░░░   15.60 % 
-Sunday                   186 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   06.83 % 
+Monday 🗓️                291 commits         ███░░░░░░░░░░░░░░░░░░░░░░   10.68 % 
+Tuesday 💪               594 commits         █████░░░░░░░░░░░░░░░░░░░░   21.80 % 
+Wednesday 🗓️             403 commits         ████░░░░░░░░░░░░░░░░░░░░░   14.79 % 
+Thursday 🗓️              300 commits         ███░░░░░░░░░░░░░░░░░░░░░░   11.01 % 
+Friday 🗓️                526 commits         █████░░░░░░░░░░░░░░░░░░░░   19.30 % 
+Saturday 🗓️              425 commits         ████░░░░░░░░░░░░░░░░░░░░░   15.60 % 
+Sunday 🗓️                186 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   06.83 % 
 ```
 
 
@@ -279,7 +275,7 @@ VS Code                  4 mins              ███████████�
 Linux                    4 mins              █████████████████████████   100.00 % 
 ```
 
-**I Mostly Code in TypeScript** 
+**💻 I Mostly Code in TypeScript** 
 
 ```text
 TypeScript               34 repos            ██████████████░░░░░░░░░░░   57.63 % 
@@ -289,8 +285,7 @@ Python                   4 repos             ██░░░░░░░░░�
 Java                     1 repo              ░░░░░░░░░░░░░░░░░░░░░░░░░   01.69 % 
 ```
 
-
-
+Last Updated: (Current Date Placeholder) 🗓️ (Note: Update manually or via automation)
 
 <!--END_SECTION:waka-->
 
