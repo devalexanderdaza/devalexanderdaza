@@ -222,25 +222,64 @@ I'm a passionate software developer focused on creating innovative 💡 and sust
 ## 📊 WakaTime Weekly Stats
 
 <!--START_SECTION:waka-->
+![Code Time](http://img.shields.io/badge/Code%20Time-2%2C098%20hrs%2052%20mins-blue)
+
+![Profile Views](http://img.shields.io/badge/Profile%20Views-2-blue)
+
 ![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-34.2%20million%20lines%20of%20code-blue)
 
 **🐱 My GitHub Data** 
+
+> 📦 321.2 kB Used in GitHub's Storage 
+ > 
+> 🏆 328 Contributions in the Year 2025
+ > 
+> 💼 Opted to Hire
+ > 
+> 📜 25 Public Repositories 
+ > 
+> 🔑 38 Private Repositories 
+ > 
+**I'm a Night 🦉** 
+
+```text
+🌞 Morning                654 commits         █████░░░░░░░░░░░░░░░░░░░░   21.66 % 
+🌆 Daytime                690 commits         ██████░░░░░░░░░░░░░░░░░░░   22.86 % 
+🌃 Evening                665 commits         ██████░░░░░░░░░░░░░░░░░░░   22.03 % 
+🌙 Night                  1010 commits        ████████░░░░░░░░░░░░░░░░░   33.45 % 
+```
+📅 **I'm Most Productive on Tuesday** 
+
+```text
+Monday                   310 commits         ███░░░░░░░░░░░░░░░░░░░░░░   10.27 % 
+Tuesday                  684 commits         ██████░░░░░░░░░░░░░░░░░░░   22.66 % 
+Wednesday                437 commits         ████░░░░░░░░░░░░░░░░░░░░░   14.47 % 
+Thursday                 323 commits         ███░░░░░░░░░░░░░░░░░░░░░░   10.70 % 
+Friday                   579 commits         █████░░░░░░░░░░░░░░░░░░░░   19.18 % 
+Saturday                 477 commits         ████░░░░░░░░░░░░░░░░░░░░░   15.80 % 
+Sunday                   209 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   06.92 % 
+```
 
 
 📊 **This Week I Spent My Time On** 
 
 ```text
+🕑︎ Time Zone: America/Bogota
+
 💬 Programming Languages: 
 No Activity Tracked This Week
 
 🔥 Editors: 
 No Activity Tracked This Week
 
+🐱‍💻 Projects: 
+No Activity Tracked This Week
+
 💻 Operating System: 
 No Activity Tracked This Week
 ```
 
-**💻 I Mostly Code in TypeScript** 
+**I Mostly Code in TypeScript** 
 
 ```text
 TypeScript               39 repos            ███████████████░░░░░░░░░░   58.21 % 
@@ -250,9 +289,14 @@ Python                   4 repos             █░░░░░░░░░░�
 Java                     1 repo              ░░░░░░░░░░░░░░░░░░░░░░░░░   01.49 % 
 ```
 
-Last Updated: (Current Date Placeholder) 🗓️ (Note: Update manually or via automation)
 
- Last Updated on 24/05/2025 21:25:05 UTC
+
+**Timeline**
+
+![Lines of Code chart](https://raw.githubusercontent.com/devalexanderdaza/devalexanderdaza/main/assets/bar_graph.png)
+
+
+ Last Updated on YYYY-MM-DD UTC
 <!--END_SECTION:waka-->
 
 <br>
