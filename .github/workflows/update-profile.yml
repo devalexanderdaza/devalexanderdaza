@@ -97,18 +97,11 @@ jobs:
           # Check if cache was hit or not
           if [ -d ".cache" ]; then
             echo "Cache hit, restoring..."
-            # Restore the cache
-            if [ -f ".cache/last_stats.json" ]; then
-              cp .cache/last_stats.json stats.json
-            fi
-            echo "Cache restored successfully."
+            # Potential other cache restoration logic for files used by actions can remain if any.
+            echo "Cache restored successfully." # Or similar message
           else
             echo "No cache found, creating a new one."
             mkdir -p .cache
-          fi
-          # Save the current stats to the cache
-          if [ -f "stats.json" ]; then
-            cp stats.json .cache/last_stats.json
           fi
           # Display cache status
           if [ -d ".cache" ]; then
@@ -139,54 +132,7 @@ jobs:
           LANG_COUNT: 15 # Number of languages to show in the chart. -1 for all languages
           SECTION_NAME: "wakareadme"
 
-      - name: 🔍 Check for significant changes
-        id: check-changes
-        run: |
-          # Compara estadísticas actuales con las anteriores
-          if [ -f ".cache/last_stats.json" ]; then
-            # Lógica para comparar y decidir si actualizar
-            # echo "should_update=$(python3 -c 'import sys, json, os; print("true" if not os.path.exists(".cache/last_stats.json") or json.load(open(".cache/last_stats.json"))["total_coding_time"] != json.load(sys.stdin)["total_coding_time"] else "false")')"
-            CURRENT_STATS=$(cat stats.json)
-            LAST_STATS=$(cat .cache/last_stats.json)
-            CURRENT_TIME=$(echo $CURRENT_STATS | jq '.total_coding_time')
-            LAST_TIME=$(echo $LAST_STATS | jq '.total_coding_time')
-            CURRENT_DATE=$(echo $CURRENT_STATS | jq '.last_update')
-            LAST_DATE=$(echo $LAST_STATS | jq '.last_update')
-            CURRENT_DATE=$(date -d "$CURRENT_DATE" +%s)
-            LAST_DATE=$(date -d "$LAST_DATE" +%s)
-            TIME_DIFF=$((CURRENT_DATE - LAST_DATE))
-            TIME_DIFF_DAYS=$((TIME_DIFF / 86400))
-            TIME_DIFF_HOURS=$((TIME_DIFF / 3600))
-            TIME_DIFF_MINUTES=$((TIME_DIFF / 60))
-            TIME_DIFF_SECONDS=$((TIME_DIFF % 60))
-            echo "Tiempo actual: $CURRENT_TIME"
-            echo "Último tiempo: $LAST_TIME"
-            echo "Diferencia de tiempo: $TIME_DIFF_DAYS días, $TIME_DIFF_HOURS horas, $TIME_DIFF_MINUTES minutos, $TIME_DIFF_SECONDS segundos"
-            echo "Diferencia de tiempo en segundos: $TIME_DIFF"
-            echo "Diferencia de tiempo en minutos: $TIME_DIFF_MINUTES"
-            echo "Diferencia de tiempo en horas: $TIME_DIFF_HOURS"
-            echo "Diferencia de tiempo en días: $TIME_DIFF_DAYS"
-            if [ "$CURRENT_TIME" = "$LAST_TIME" ] && [ "$TIME_DIFF_DAYS" -lt 7 ]; then
-              echo "should_update=false" >> $GITHUB_OUTPUT
-              echo "No se requiere actualización."
-            else
-              echo "should_update=true" >> $GITHUB_OUTPUT
-              echo "Se requiere actualización."
-            fi
-          else
-            echo "should_update=true" >> $GITHUB_OUTPUT
-            echo "No se encontraron estadísticas anteriores. Se requiere actualización."
-          fi
-          # Guardar las estadísticas actuales en el caché
-          if [ -f "stats.json" ]; then
-            cp stats.json .cache/last_stats.json
-            echo "Estadísticas actuales guardadas en el caché."
-          else
-            echo "No se encontraron estadísticas actuales para guardar."
-          fi
-
       - name: 📊 Update WakaTime Stats
-        if: steps.check-changes.outputs.should_update == 'true'
         uses: anmol098/waka-readme-stats@master
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
