@@ -222,7 +222,7 @@ I'm a passionate software developer focused on creating innovative 💡 and sust
 ## 📊 WakaTime Weekly Stats
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-2%2C271%20hrs%203%20mins-blue)
+![Code Time](http://img.shields.io/badge/Code%20Time-2%2C272%20hrs-blue)
 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-0-blue)
 
@@ -230,9 +230,9 @@ I'm a passionate software developer focused on creating innovative 💡 and sust
 
 **🐱 My GitHub Data** 
 
-> 📦 346.0 kB Used in GitHub's Storage 
+> 📦 346.2 kB Used in GitHub's Storage 
  > 
-> 🏆 770 Contributions in the Year 2025
+> 🏆 772 Contributions in the Year 2025
  > 
 > 💼 Opted to Hire
  > 
@@ -243,11 +243,11 @@ I'm a passionate software developer focused on creating innovative 💡 and sust
 **I Mostly Code in TypeScript** 
 
 ```text
-TypeScript               49 repos            ███████████████░░░░░░░░░░   61.25 % 
-JavaScript               9 repos             ███░░░░░░░░░░░░░░░░░░░░░░   11.25 % 
-Python                   6 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   07.50 % 
-HTML                     4 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   05.00 % 
-Svelte                   3 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   03.75 % 
+TypeScript               48 repos            ███████████████░░░░░░░░░░   60.76 % 
+JavaScript               9 repos             ███░░░░░░░░░░░░░░░░░░░░░░   11.39 % 
+Python                   6 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   07.59 % 
+HTML                     4 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   05.06 % 
+Svelte                   3 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   03.80 % 
 ```
 
 
