@@ -1,13 +1,13 @@
 name: Profile Dashboard Update
 
 on:
-  workflow_dispatch: # 🔄 Allow manual trigger
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 0'  # 🕛 Every Sunday at midnight UTC
+    - cron: '0 0 * * 0'
 
 jobs:
   update-profile:
-    name: 🔄 Update GitHub Profile Dashboard
+    name: Update GitHub Profile Dashboard
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -17,28 +17,26 @@ jobs:
       GH_USERNAME: ${{ vars.GH_USERNAME }}
       GH_REPO: ${{ vars.GH_REPO }}
     steps:
-      - name: 🔍 Validate Required Secrets
+      - name: Validate Required Secrets
         run: |
           missing_secrets=()
-          
-          # Check WakaTime related secrets
+
           if [ -z "${{ secrets.WAKATIME_API_KEY }}" ]; then
             missing_secrets+=("WAKATIME_API_KEY")
           fi
-          
-          # Check GitHub related secrets
+
           if [ -z "${{ secrets.GITHUB_TOKEN }}" ]; then
             missing_secrets+=("GITHUB_TOKEN")
           fi
-          
+
           if [ -z "${{ secrets.GH_TOKEN }}" ]; then
             missing_secrets+=("GH_TOKEN")
           fi
-          
+
           if [ -z "${{ env.GH_EMAIL }}" ]; then
             missing_secrets+=("GH_EMAIL")
           fi
-          
+
           if [ -z "${{ env.GH_USERNAME }}" ]; then
             missing_secrets+=("GH_USERNAME")
           fi
@@ -50,37 +48,33 @@ jobs:
           if [ -z "${{ env.GH_REPO }}" ]; then
             missing_secrets+=("GH_REPO")
           fi
-          
-          # Show error if any secrets are missing
+
           if [ ${#missing_secrets[@]} -ne 0 ]; then
-            echo "❌ Error: The following required secrets are missing: ${missing_secrets[*]}"
+            echo "Error: The following required secrets are missing: ${missing_secrets[*]}"
             echo "Please define them in the repository settings."
             exit 1
           fi
-          
-          echo "✅ All required secrets are defined."
 
-      - name: 📜 Setup Git Configuration
+          echo "All required secrets are defined."
+
+      - name: Setup Git Configuration
         run: |
           git config --global user.name "${{ env.GH_ACTOR }}"
           git config --global user.email "${{ env.GH_EMAIL }}"
           git config --global init.defaultBranch main
 
-      - name: 📥 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 5 # Fetch the last 5 commits for better performance
-          repository: ${{ env.GH_REPO }} # Checkout the user's own repository
-          # persist-credentials: false # Do not use the default token for authentication
-          ref: main # Specify the branch to checkout
-          # token: ${{ secrets.GH_TOKEN }} # Use the GitHub token for authentication
-          clean: false # Do not clean the working directory for faster checkout
-          submodules: false # Do not fetch submodules
-          show-progress: false # Show progress during checkout
+          fetch-depth: 5
+          repository: ${{ env.GH_REPO }}
+          ref: main
+          clean: false
+          submodules: false
+          show-progress: false
 
-      # Setup cache for WakaTime
-      - name: 🗄️ Setup Cache for WakaTime
-        uses: actions/cache@v3
+      - name: Setup Cache for WakaTime
+        uses: actions/cache@v4
         id: cache
         continue-on-error: true
         timeout-minutes: 10
@@ -91,26 +85,19 @@ jobs:
             wakatime-cache-${{ vars.GH_REPO }}-
             wakatime-cache-
 
-      - name: 📋 Handle Cache Status
+      - name: Handle Cache Status
         id: cache-status
         run: |
-          # Check if cache was hit or not
           if [ -d ".cache" ]; then
             echo "Cache hit, restoring..."
-            # Potential other cache restoration logic for files used by actions can remain if any.
-            echo "Cache restored successfully." # Or similar message
+            echo "cache_hit=true" >> $GITHUB_OUTPUT
           else
             echo "No cache found, creating a new one."
             mkdir -p .cache
-          fi
-          # Display cache status
-          if [ -d ".cache" ]; then
-            echo "cache_hit=true" >> $GITHUB_OUTPUT
-          else
             echo "cache_hit=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 📊 Update README with WakaTime Stats
+      - name: Update README with WakaTime Stats
         uses: athul/waka-readme@master
         timeout-minutes: 10
         continue-on-error: true
@@ -126,13 +113,12 @@ jobs:
           COMMIT_MESSAGE: "chore(stats): update README.md with WakaTime Readme [skip ci]"
           TARGET_BRANCH: main
           SHOW_TITLE: true
-          # Language for the chart. Options: "python", "javascript", "java", "csharp", "go", "ruby", "php", "swift", "typescript", "html", "css", "bash", "sql", "kotlin", "rust", "typescriptreact", "typescript.tsx"
           CODE_LANG: py js java go ruby php ts html css sh kt rust json yaml yml md
-          TIME_RANGE: all_time # Time range for the chart. Options: "last_7_days", "last_30_days", "last_90_days", "last_year"
-          LANG_COUNT: 15 # Number of languages to show in the chart. -1 for all languages
+          TIME_RANGE: all_time
+          LANG_COUNT: 15
           SECTION_NAME: "wakareadme"
 
-      - name: 📊 Update WakaTime Stats
+      - name: Update WakaTime Stats
         uses: anmol098/waka-readme-stats@master
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
@@ -144,7 +130,7 @@ jobs:
           SHOW_DAYS_OF_WEEK: "True"
           SHOW_LANGUAGE: "True"
           SHOW_OS: "True"
-          SHOW_PROJECTS: "True" 
+          SHOW_PROJECTS: "True"
           SHOW_EDITORS: "True"
           SHOW_LANGUAGE_PER_REPO: "True"
           SHOW_SHORT_INFO: "True"
